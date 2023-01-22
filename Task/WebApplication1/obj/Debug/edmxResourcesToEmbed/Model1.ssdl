@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EntityTaskModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cities">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CityName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerIDs" />
+    </Key>
+    <Property Name="CustomerIDs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerNames" Type="nvarchar" MaxLength="100" />
+    <Property Name="CustomerAges" Type="int" />
+    <Property Name="CustomerCity" Type="nvarchar" MaxLength="100" />
+    <Property Name="CustomerPhone" Type="int" />
+    <Property Name="CustomerEmail" Type="nvarchar" MaxLength="100" />
+    <Property Name="CustomerPhoto" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK__Cities__CityId__398D8EEE">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="CustomerIDs" />
+      </Principal>
+      <Dependent Role="Cities">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EntityTaskModelStoreContainer">
+    <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Cities__CityId__398D8EEE" Association="Self.FK__Cities__CityId__398D8EEE">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Cities" EntitySet="Cities" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
